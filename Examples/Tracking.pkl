@@ -1,0 +1,22 @@
+amends ".../PrivacyManifestFile.pkl"
+
+NSPrivacyTracking = true
+NSPrivacyTrackingDomains {
+    "com.github.fumito-ito.privacymanifest.pkl"
+}
+NSPrivacyAccessedAPITypes {
+    new {
+        NSPrivacyAccessedAPIType = "NSPrivacyAccessedAPICategoryFileTimestamp"
+        NSPrivacyAccessedAPITypeReasons = Set(
+            "DDA9.1"
+        )
+    }
+}
+NSPrivacyCollectedDataTypes {
+    new {
+        NSPrivacyCollectedDataType = "NSPrivacyCollectedDataTypeName"
+        NSPrivacyCollectedDataTypePurposes = Set(
+            "NSPrivacyCollectedDataTypePurposeThirdPartyAdvertising"
+        )
+    }
+}
