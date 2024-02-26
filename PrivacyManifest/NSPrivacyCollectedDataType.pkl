@@ -1,12 +1,9 @@
 module NSPrivacyCollectedDataType
 
-/// 
-class NSPrivacyCollectedDataType {
-    NSPrivacyCollectedDataType: PrivacyCollectedData.PrivacyCollectedDataType
-    NSPrivacyCollectedDataTypeLinked: Boolean
-    NSPrivacyCollectedDataTypeTracking: Boolean
-    NSPrivacyCollectedDataTypePurposes: Set<PrivacyCollectedData.PrivacyCollectedDataTypePurposes>
-}
+NSPrivacyCollectedDataType: PrivacyCollectedDataType
+NSPrivacyCollectedDataTypeLinked: Boolean = false
+NSPrivacyCollectedDataTypeTracking: Boolean = false
+NSPrivacyCollectedDataTypePurposes: Set<PrivacyCollectedDataTypePurpose>
 
 /// The categories of data your app or third-party SDK collects.
 ///

@@ -1,9 +1,7 @@
 module NSPrivacyAccessedAPIType
 
-open class NSPrivacyAccessedAPIType {
-    NSPrivacyAccessedAPIType: PrivacyAccessedAPIType
-    NSPrivacyAccessedAPITypeReasons: Set<PrivacyAccessedAPITypeReason>
-}
+NSPrivacyAccessedAPIType: PrivacyAccessedAPIType
+NSPrivacyAccessedAPITypeReasons: Set<PrivacyAccessedAPITypeReason>
 
 typealias PrivacyAccessedAPIType =
     "NSPrivacyAccessedAPICategoryFileTimestamp"
