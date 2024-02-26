@@ -1,0 +1,54 @@
+module NSPrivacyCollectedDataType
+
+/// 
+class NSPrivacyCollectedDataType {
+    NSPrivacyCollectedDataType: PrivacyCollectedData.PrivacyCollectedDataType
+    NSPrivacyCollectedDataTypeLinked: Boolean
+    NSPrivacyCollectedDataTypeTracking: Boolean
+    NSPrivacyCollectedDataTypePurposes: Set<PrivacyCollectedData.PrivacyCollectedDataTypePurposes>
+}
+
+/// The categories of data your app or third-party SDK collects.
+///
+/// For more detail, see https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_data_use_in_privacy_manifests#4250555 .
+/// 
+/// NOTICE: This alias is under construction.
+typealias PrivacyCollectedDataType =
+    // Contact info
+    //
+    "NSPrivacyCollectedDataTypeName"
+    // 
+    |"NSPrivacyCollectedDataTypeEmailAddress"
+    // 
+    |"NSPrivacyCollectedDataTypePhoneNumber"
+    //
+    |"NSPrivacyCollectedDataTypePhysicalAddress"
+    //
+    |"NSPrivacyCollectedDataTypeOtherUserContactInfo"
+    // Health & fitness
+    |"NSPrivacyCollectedDataTypeHealth"
+    |"NSPrivacyCollectedDataTypeFitness"
+    // Financial info
+    |"NSPrivacyCollectedDataTypePaymentInfo"
+    |"NSPrivacyCollectedDataTypeCreditInfo"
+    |"NSPrivacyCollectedDataTypeOtherFinancialInfo"
+    // Location
+    |"NSPrivacyCollectedDataTypePreciseLocation"
+    |"NSPrivacyCollectedDataTypeCoarseLocation"
+    // Sensitive info
+    |"NSPrivacyCollectedDataTypeSensitiveInfo"
+    // Contacts
+    |"NSPrivacyCollectedDataTypeContacts"
+    // User content
+    |"NSPrivacyCollectedDataTypeEmailsOrTextMessages"
+
+/// The reasons your app or third-party SDK collects data.
+///
+/// For more detail, see https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_data_use_in_privacy_manifests#4250556 .
+typealias PrivacyCollectedDataTypePurpose =
+    "NSPrivacyCollectedDataTypePurposeThirdPartyAdvertising"
+    |"NSPrivacyCollectedDataTypePurposeDeveloperAdvertising"
+    |"NSPrivacyCollectedDataTypePurposeAnalytics"
+    |"NSPrivacyCollectedDataTypePurposeProductPersonalization"
+    |"NSPrivacyCollectedDataTypePurposeAppFunctionality"
+    |"NSPrivacyCollectedDataTypePurposeOther"

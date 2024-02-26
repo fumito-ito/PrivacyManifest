@@ -1,0 +1,12 @@
+module PrivacyManifestFile
+
+import "PrivacyManifest/NSPrivacyAccessedAPIType.pkl"
+import "PrivacyManifest/NSPrivacyCollectedDataType.pkl"
+
+// see https://regexr.com/3au3g
+typealias PrivacyTrackingDomain = String(matches(Regex(#"^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$"#)))
+
+NSPrivacyTracking: Boolean = false
+NSPrivacyTrackingDomains: Listing<PrivacyTrackingDomain>?
+NSPrivacyAccessedAPITypes: Listing<NSPrivacyAccessedAPIType>?
+NSPrivacyCollectedDataTypes: Listing<NSPrivacyCollectedDataType>?
