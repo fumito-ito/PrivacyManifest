@@ -1,27 +1,97 @@
+/// Describing use of required reason API
+///
+/// For each category of required reason API that your app or third-party SDK uses, add a dictionary to the NSPrivacyAccessedAPITypes array in your app or third-party SDK’s privacy manifest file that reports the reasons your app uses the API category.
+/// If you use the API in your app’s code, then you need to report the API in your app’s privacy manifest file.
+/// If you use the API in your third-party SDK’s code, then you need to report the API in your third-party SDK’s privacy manifest file.
+/// Your third-party SDK can’t rely on the privacy manifest files for apps that link the third-party SDK, or those of other third-party SDKs the app links, to report your third-party SDK’s use of required reasons API.
 module NSPrivacyAccessedAPIType
 
 NSPrivacyAccessedAPIType: PrivacyAccessedAPIType
-NSPrivacyAccessedAPITypeReasons: Set<PrivacyAccessedAPITypeReason>
+NSPrivacyAccessedAPITypeReasons: Set<PrivacyAccessedAPITypeReason>(
+    isCorrectFileTimeStampReasons.apply(this)
+    .xor(isCorrectSystemBootTimeReasons.apply(this))
+    .xor(isCorrectDiskSpaceReasonReasons.apply(this))
+    .xor(isCorrectActiveKeyboardsReasons.apply(this))
+    .xor(isCorrectUserDefaultsReasons.apply(this))
+)
 
+// MARK: - FileTimeStamp API
+hidden isFileTimeStamp: Boolean = (NSPrivacyAccessedAPIType == "NSPrivacyAccessedAPICategoryFileTimestamp")
+local isFileTimeStampReason = (reason: String) -> (reason == "DDA9.1") || (reason == "C617.1") || (reason == "3B52.1") || (reason == "0A2A.1")
+local isCorrectFileTimeStampReasons = (reasons: Set<PrivacyAccessedAPITypeReason>) -> (isFileTimeStamp && reasons.filter((element) -> !isFileTimeStampReason.apply(element)).isEmpty)
+
+// MARK: - SystemBootTime API
+hidden isSystemBootTime: Boolean = (NSPrivacyAccessedAPIType == "NSPrivacyAccessedAPICategorySystemBootTime")
+local isSystemBootTimeReason = (reason: String) -> (reason == "35F9.1")
+local isCorrectSystemBootTimeReasons = (reasons: Set<PrivacyAccessedAPITypeReason>) -> (isSystemBootTime && reasons.filter((element) -> !isSystemBootTimeReason.apply(element)).isEmpty)
+
+// MARK: - DiskSpace API
+hidden isDiskSpace: Boolean = (NSPrivacyAccessedAPIType == "NSPrivacyAccessedAPICategoryDiskSpace")
+local isDiskSpaceReason = (reason: String) -> (reason == "85F4.1") || (reason == "E174.1") || (reason == "7D9E.1")
+local isCorrectDiskSpaceReasonReasons = (reasons: Set<PrivacyAccessedAPITypeReason>) -> (isDiskSpace && reasons.filter((element) -> !isDiskSpaceReason.apply(element)).isEmpty)
+
+// MARK: - ActiveKeyboards API
+hidden isActiveKeyboards: Boolean = (NSPrivacyAccessedAPIType == "NSPrivacyAccessedAPICategoryActiveKeyboards")
+local isActiveKeyboardsReason = (reason: String) -> (reason == "3EC4.1") || (reason == "54BD.1")
+local isCorrectActiveKeyboardsReasons = (reasons: Set<PrivacyAccessedAPITypeReason>) -> (isActiveKeyboards && reasons.filter((element) -> !isActiveKeyboardsReason.apply(element)).isEmpty)
+
+// MARK: - UserDefaults API
+hidden isUserDefaults: Boolean = (NSPrivacyAccessedAPIType == "NSPrivacyAccessedAPICategoryUserDefaults")
+local isUserDefaultsReason = (reason: String) -> (reason == "CA92.1") || (reason == "1C8F.1")|| (reason == "C56D.1")|| (reason == "AC6B.1")
+local isCorrectUserDefaultsReasons = (reasons: Set<PrivacyAccessedAPITypeReason>) -> (isUserDefaults && reasons.filter((element) -> !isUserDefaultsReason.apply(element)).isEmpty)
+
+/// A string that identifies the category of required reason APIs your app uses. The value you provide must be one of the values listed in the sections below.
 typealias PrivacyAccessedAPIType =
+    // The following APIs for accessing file timestamps require reasons for use. Use the string NSPrivacyAccessedAPICategoryFileTimestamp as the value for the NSPrivacyAccessedAPIType key in your NSPrivacyAccessedAPITypes dictionary.
     "NSPrivacyAccessedAPICategoryFileTimestamp"
+    // The following APIs for accessing the system boot time require reasons for use. Use the string NSPrivacyAccessedAPICategorySystemBootTime as the value for the NSPrivacyAccessedAPIType key in your NSPrivacyAccessedAPITypes dictionary.
     |"NSPrivacyAccessedAPICategorySystemBootTime"
+    // The following APIs for accessing the available disk space require reasons for use. Use the string NSPrivacyAccessedAPICategoryDiskSpace as the value for the NSPrivacyAccessedAPIType key in your NSPrivacyAccessedAPITypes dictionary.
     |"NSPrivacyAccessedAPICategoryDiskSpace"
+    // The following API for accessing the list of active keyboards requires reasons for use. Use the string NSPrivacyAccessedAPICategoryActiveKeyboards as the value for the NSPrivacyAccessedAPIType key in your NSPrivacyAccessedAPITypes dictionary.
     |"NSPrivacyAccessedAPICategoryActiveKeyboards"
+    // The following API for accessing user defaults requires reasons for use. Use the string NSPrivacyAccessedAPICategoryUserDefaults as the value for the NSPrivacyAccessedAPIType key in your NSPrivacyAccessedAPITypes dictionary.
     |"NSPrivacyAccessedAPICategoryUserDefaults"
 
+/// An array of strings that identifies the reasons your app uses the APIs. The values you provide must be the values associated with the accessed API type in the sections below.
 typealias PrivacyAccessedAPITypeReason =
+    // Declare this reason to display file timestamps to the person using the device.
+    // Information accessed for this reason, or any derived information, may not be sent off-device.
     "DDA9.1"
+    // Declare this reason to access the timestamps, size, or other metadata of files inside the app container, app group container, or the app’s CloudKit container.
     |"C617.1"
+    // Declare this reason to access the timestamps, size, or other metadata of files or directories that the user specifically granted access to, such as using a document picker view controller.
     |"3B52.1"
+    // Declare this reason if your third-party SDK is providing a wrapper function around file timestamp API(s) for the app to use, and you only access the file timestamp APIs when the app calls your wrapper function. This reason may only be declared by third-party SDKs. This reason may not be declared if your third-party SDK was created primarily to wrap required reason API(s).
+    // Information accessed for this reason, or any derived information, may not be used for your third-party SDK’s own purposes or sent off-device by your third-party SDK.
     |"0A2A.1"
+    // Declare this reason to access the system boot time in order to measure the amount of time that has elapsed between events that occurred within the app or to perform calculations to enable timers.
+    // Information accessed for this reason, or any derived information, may not be sent off-device. There is an exception for information about the amount of time that has elapsed between events that occurred within the app, which may be sent off-device.
     |"35F9.1"
+    // Declare this reason to display disk space information to the person using the device. Disk space may be displayed in units of information (such as bytes) or units of time combined with a media type (such as minutes of HD video).
+    // Information accessed for this reason, or any derived information, may not be sent off-device. There is an exception that allows the app to send disk space information over the local network to another device operated by the same person only for the purpose of displaying disk space information on that device; this exception only applies if the user has provided explicit permission to send disk space information, and the information may not be sent over the Internet.
     |"85F4.1"
+    // Declare this reason to check whether there is sufficient disk space to write files, or to check whether the disk space is low so that the app can delete files when the disk space is low. The app must behave differently based on disk space in a way that is observable to users.
+    // Information accessed for this reason, or any derived information, may not be sent off-device. There is an exception that allows the app to avoid downloading files from a server when disk space is insufficient.
     |"E174.1"
+    // Declare this reason to include disk space information in an optional bug report that the person using the device chooses to submit. The disk space information must be prominently displayed to the person as part of the report.
+    // Information accessed for this reason, or any derived information, may be sent off-device only after the user affirmatively chooses to submit the specific bug report including disk space information, and only for the purpose of investigating or responding to the bug report.
     |"7D9E.1"
+    // Declare this reason if your app is a custom keyboard app, and you access this API category to determine the keyboards that are active on the device.
+    // Providing a systemwide custom keyboard to the user must be the primary functionality of the app.
+    // Information accessed for this reason, or any derived information, may not be sent off-device.
     |"3EC4.1"
+    // Declare this reason to access active keyboard information to present the correct customized user interface to the person using the device. The app must have text fields for entering or editing text and must behave differently based on active keyboards in a way that is observable to users.
+    // Information accessed for this reason, or any derived information, may not be sent off-device.
     |"54BD.1"
+    // Declare this reason to access user defaults to read and write information that is only accessible to the app itself.
+    // This reason does not permit reading information that was written by other apps or the system, or writing information that can be accessed by other apps.
     |"CA92.1"
+    // Declare this reason to access user defaults to read and write information that is only accessible to the apps, app extensions, and App Clips that are members of the same App Group as the app itself.
+    // This reason does not permit reading information that was written by apps, app extensions, or App Clips outside the same App Group or by the system. This reason also does not permit writing information that can be accessed by apps, app extensions, or App Clips outside the same App Group.
     |"1C8F.1"
+    // Declare this reason if your third-party SDK is providing a wrapper function around user defaults API(s) for the app to use, and you only access the user defaults APIs when the app calls your wrapper function. This reason may only be declared by third-party SDKs. This reason may not be declared if your third-party SDK was created primarily to wrap required reason API(s).
+    // Information accessed for this reason, or any derived information, may not be used for your third-party SDK’s own purposes or sent off-device by your third-party SDK.
     |"C56D.1"
+    // Declare this reason to access user defaults to read the com.apple.configuration.managed key to retrieve the managed app configuration set by MDM, or to set the com.apple.feedback.managed key to store feedback information to be queried over MDM, as described in the Apple Mobile Device Management Protocol Reference documentation.
     |"AC6B.1"

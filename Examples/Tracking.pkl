@@ -2,7 +2,7 @@ amends ".../PrivacyManifestFile.pkl"
 
 NSPrivacyTracking = true
 NSPrivacyTrackingDomains {
-    "com.github.fumito-ito.privacymanifest.pkl"
+    "com.github.fumito-ito.PrivacyManifest.pkl"
 }
 NSPrivacyAccessedAPITypes {
     new {
