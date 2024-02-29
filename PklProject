@@ -1,0 +1,21 @@
+amends "pkl:Project"
+
+package {
+  name = "PrivacyManifest"
+  baseUri = "package://pkg.pkl-lang.org/github.com/fumito-ito/PrivacyManifest"
+  version = "0.0.1"
+  packageZipUrl = "https://github.com/fumito-ito/PrivacyManifest.pkl/releases/download/v\(version)/\(name)@\(version).zip"
+  description = "PrivacyManifest is the pkl file that provides the benefits of static typing to generate Apple's xcprivacy file."
+  authors {
+    "Fumito Ito <weathercook@gmail.com>"
+  }
+  license = "Apache-2.0"
+  sourceCode = "https://github.com/fumito-ito/PrivacyManifest.pkl"
+  exclude {
+    "Examples/**"
+    "PklProject"
+    "PklProject.deps.json"
+    ".**"
+  }
+  issueTracker = "https://github.com/fumito-ito/PrivacyManifest.pkl/issues"
+}
