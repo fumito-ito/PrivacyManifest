@@ -11,7 +11,7 @@ Packages within this repository are published as `package://pkg.pkl-lang.org/git
 Modules from package can be imported directly. For example, the below line imports the module from package at version `1.0.0`:
 
 ```pkl
-import "package://pkg.pkl-lang.org/github.com/fumito-ito/PrivacyManifest@1.0.0#/PrivacyManifestFile"
+import "package://pkg.pkl-lang.org/github.com/fumito-ito/PrivacyManifest/PrivacyManifest@0.0.1"
 ```
 
 ## Usage
@@ -19,7 +19,7 @@ import "package://pkg.pkl-lang.org/github.com/fumito-ito/PrivacyManifest@1.0.0#/
 create your pkl file to generate `xcprivacy` file.
 
 ```pkl
-import "package://pkg.pkl-lang.org/github.com/fumito-ito/PrivacyManifest@1.0.0#/PrivacyManifestFile"
+amends "package://pkg.pkl-lang.org/github.com/fumito-ito/PrivacyManifest/PrivacyManifest@0.0.1#/PrivacyManifestFile.pkl"
 
 NSPrivacyTracking = true
 NSPrivacyTrackingDomains {
