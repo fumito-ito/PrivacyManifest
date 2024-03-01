@@ -17,3 +17,7 @@ NSPrivacyTrackingDomains: Listing<PrivacyTrackingDomain>((NSPrivacyTracking && !
 NSPrivacyAccessedAPITypes: Listing<NSPrivacyAccessedAPIType>?
 /// An array of dictionaries that describe the API types your app or third-party SDK accesses that have been designated as APIs that require reasons to access. For information on the keys and values to use in the dictionaries, see [Describing use of required reason API](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api).
 NSPrivacyCollectedDataTypes: Listing<NSPrivacyCollectedDataType>?
+
+output {
+    renderer = new PListRenderer {}
+}

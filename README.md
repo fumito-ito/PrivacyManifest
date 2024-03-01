@@ -30,7 +30,7 @@ NSPrivacyTrackingDomains {
 ... and generate !
 
 ```sh
-$ pkl eval -f plist YourPklFile.pkl > PrivacyInfo.xcprivacy
+$ pkl eval YourPklFile.pkl > PrivacyInfo.xcprivacy
 ```
 
 ## Validation
