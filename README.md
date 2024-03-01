@@ -53,10 +53,10 @@ If `NSPrivacyTracking = true`, `NSPrivacyTrackingDomains` needs one or more doma
 
 Check that the correct names are used for the classes listed below.
 
-- NSPrivacyAccessedAPIType
-- NSPrivacyAccessedAPITypeReasons
-- NSPrivacyCollectedDataType
-- NSPrivacyCollectedDataTypePurposes
+- `NSPrivacyAccessedAPIType`
+- `NSPrivacyAccessedAPITypeReasons`
+- `NSPrivacyCollectedDataType`
+- `NSPrivacyCollectedDataTypePurposes`
 
 ## Dependencies
 
