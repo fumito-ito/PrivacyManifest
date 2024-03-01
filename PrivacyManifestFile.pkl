@@ -1,3 +1,4 @@
+@ModuleInfo { minPklVersion = "0.25.2" }
 module PrivacyManifestFile
 
 import "PrivacyManifest/NSPrivacyAccessedAPIType.pkl"
