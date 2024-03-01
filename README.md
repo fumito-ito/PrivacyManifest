@@ -8,7 +8,7 @@ Packages within this repository are published as `package://pkg.pkl-lang.org/git
 
 ### Direct imports
 
-Modules from package can be imported directly. For example, the below line imports the module from package at version `1.0.0`:
+Modules from package can be imported directly. For example, the below line imports the module from package at version `0.0.1`:
 
 ```pkl
 import "package://pkg.pkl-lang.org/github.com/fumito-ito/PrivacyManifest/PrivacyManifest@0.0.1"
@@ -32,6 +32,31 @@ NSPrivacyTrackingDomains {
 ```sh
 $ pkl eval -f plist YourPklFile.pkl > PrivacyInfo.xcprivacy
 ```
+
+## Validation
+
+This module provides following validations.
+
+### Number of NSPrivacyTrackingDomains
+
+If `NSPrivacyTracking = true`, `NSPrivacyTrackingDomains` needs one or more domains.
+
+### Domain style
+
+`NSPrivacyTrackingDomains` should be domain style string, e.g. `com.example.app`
+
+### Combination of `NSPrivacyAccessedAPIType` and `NSPrivacyAccessedAPITypeReasons`
+
+`NSPrivacyAccessedAPITypeReasons` should supply the relevant values from `NSPrivacyAccessedAPIType`.
+
+### Name checking
+
+Check that the correct names are used for the classes listed below.
+
+- NSPrivacyAccessedAPIType
+- NSPrivacyAccessedAPITypeReasons
+- NSPrivacyCollectedDataType
+- NSPrivacyCollectedDataTypePurposes
 
 ## Dependencies
 
