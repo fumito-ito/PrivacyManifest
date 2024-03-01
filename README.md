@@ -1,6 +1,6 @@
 # PrivacyManifest
 
-PrivacyManifest is the pkl file that provides the benefits of static typing to generate Apple's xcprivacy file.
+PrivacyManifest is the pkl file that provides the benefits of static typing to generate [Apple's xcprivacy file](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_data_use_in_privacy_manifests).
 
 ## Installation
 
