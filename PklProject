@@ -3,7 +3,7 @@ amends "pkl:Project"
 package {
   name = "PrivacyManifest"
   baseUri = "package://pkg.pkl-lang.org/github.com/fumito-ito/PrivacyManifest"
-  version = "0.0.2"
+  version = "0.1.0"
   packageZipUrl = "https://github.com/fumito-ito/PrivacyManifest/releases/download/\(name)%40\(version)/\(name)@\(version).zip"
   description = "PrivacyManifest is the pkl file that provides the benefits of static typing to generate Apple's xcprivacy file."
   authors {
